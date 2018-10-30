@@ -31,7 +31,6 @@ import org.springframework.data.mongodb.core.query.Update;
 
 import java.io.*;
 import java.util.*;
-import java.util.stream.Collectors;
 
 /**Created by Pawel Gawedzki on 15-Mar-18.*/
 abstract class AbstractStep implements Tasklet {
@@ -142,7 +141,7 @@ abstract class AbstractStep implements Tasklet {
                     logger.error("Wrong column mapping. There are [values, headers] == <{}, {}>. Row with error parsing [{}].",
                             record.size(),
                             headers.length,
-                            list.stream().collect(Collectors.joining("&&&")),
+                            String.join("&&&", list),
                             new IllegalArgumentException("Wrong column mapping.")
                     );
                     errorObjects.add(createErrorObject(record));
