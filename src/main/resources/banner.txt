@@ -1,0 +1,8 @@
+${AnsiColor.BRIGHT_BLUE}
+  .   ____              _   ___           _        _
+ /\\ / ___'_ __ _____ _| |_|  _ \ _____ _| |_ ____| |
+( ( )\___ | '_ |  _  |_' '_| |_) )  _  |_' '_|  __) |~~~
+ \\/  ___)| |_)| (_) | | | | |_) ) (_)_| | | | |__| ( ) |
+  '  |____| .__|_____| |_| |___ /|___|_| |_| |____)_| |_|
+ =========|_|==================================================
+ ${AnsiColor.CYAN}:: Banner made by ${AnsiColor.BRIGHT_GREEN}GaWa ${AnsiColor.CYAN}::     ${AnsiColor.CYAN}Spring Boot v.${spring-boot.version} ${AnsiColor.DEFAULT}
