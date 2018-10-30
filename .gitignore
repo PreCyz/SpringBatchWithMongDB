@@ -1,3 +1,4 @@
 .idea
 .target
 log
+/src/main/resources/*.properties
