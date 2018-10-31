@@ -26,35 +26,35 @@ public class QueryColumnBuilder {
     public static QueryColumnBuilder queryForEquipmentCargoColumns(String branch) {
         return new QueryColumnBuilder()
                 .select("*")
-                .from("`" + branch + "`.`/maersk/advanced_analytics/spotlanes/data_sets/equipment_cargo`")
+                .from("`" + branch + "`.`/data_sets/equipment_cargo`")
                 .limit(1);
     }
 
     public static QueryColumnBuilder queryForOperationalRoutesColumns(String branch) {
         return new QueryColumnBuilder()
                 .select("*")
-                .from("`" + branch + "`.`/maersk/advanced_analytics/spotlanes/data_sets/operational_routes`")
+                .from("`" + branch + "`.`/data_sets/operational_routes`")
                 .limit(1);
     }
 
     public static QueryColumnBuilder queryForHaulageInfoColumns(String branch) {
         return new QueryColumnBuilder()
                 .select("*")
-                .from("`" + branch + "`.`/maersk/advanced_analytics/spotlanes/data_sets/haulage_info`")
+                .from("`" + branch + "`.`/data_sets/haulage_info`")
                 .limit(1);
     }
 
     public static QueryColumnBuilder queryForHaulageEquipmentColumns(String branch) {
         return new QueryColumnBuilder()
                 .select("*")
-                .from("`" + branch + "`.`/maersk/advanced_analytics/data/datasources/spotlanes/haulage_equipment`")
+                .from("`" + branch + "`.`/datasources/haulage_equipment`")
                 .limit(1);
     }
 
     public static QueryColumnBuilder queryForGlobalBookingsTruckinglegsColumns(String branch) {
         return new QueryColumnBuilder()
                 .select("*")
-                .from("`" + branch + "`.`/maersk/advanced_analytics/spotlanes/data_sets/global_bookings_truckinglegs`")
+                .from("`" + branch + "`.`/data_sets/global_bookings_truckinglegs`")
                 .limit(1);
     }
 
