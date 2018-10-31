@@ -18,22 +18,29 @@ public class JobConfigurer {
 
     private static final String JOB_NAME = "SYNC-DBS";
 
-    @Autowired
     private JobBuilderFactory jobBuilderFactory;
-    @Autowired
     private StepBuilderFactory stepBuilderFactory;
+    private final Tasklet equipmentCargoStep;
+    private final Tasklet haulageEquipmentStep;
+    private final Tasklet haulageInfoStep;
+    private final Tasklet operationalRouteStep;
+    private final Tasklet trackingBookingStep;
+    private final Tasklet cargoConditioningStep;
+
     @Autowired
-    private Tasklet equipmentCargoStep;
-    @Autowired
-    private Tasklet haulageEquipmentStep;
-    @Autowired
-    private Tasklet haulageInfoStep;
-    @Autowired
-    private Tasklet operationalRouteStep;
-    @Autowired
-    private Tasklet trackingBookingStep;
-    @Autowired
-    private Tasklet cargoConditioningStep;
+    public JobConfigurer(JobBuilderFactory jobBuilderFactory, StepBuilderFactory stepBuilderFactory,
+                         Tasklet equipmentCargoStep, Tasklet haulageEquipmentStep, Tasklet haulageInfoStep,
+                         Tasklet operationalRouteStep, Tasklet trackingBookingStep, Tasklet cargoConditioningStep) {
+        this.jobBuilderFactory = jobBuilderFactory;
+        this.stepBuilderFactory = stepBuilderFactory;
+
+        this.equipmentCargoStep = equipmentCargoStep;
+        this.haulageEquipmentStep = haulageEquipmentStep;
+        this.haulageInfoStep = haulageInfoStep;
+        this.operationalRouteStep = operationalRouteStep;
+        this.trackingBookingStep = trackingBookingStep;
+        this.cargoConditioningStep = cargoConditioningStep;
+    }
 
     public Job synchroniseDatabasesJob() {
         return jobBuilderFactory.get(JOB_NAME)
