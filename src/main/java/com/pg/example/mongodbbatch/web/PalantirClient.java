@@ -49,7 +49,7 @@ public class PalantirClient {
         this.logWaitIntervalInSeconds = logWaitIntervalInSeconds;
     }
 
-    public String getData(QueryColumnBuilder queryBuilder, String url) {
+    public String getSchemaData(QueryColumnBuilder queryBuilder, String url) {
         validateToken();
         HttpEntity<String> entity = new HttpEntity<>(queryBuilder.build(), createHeadersWithMediaType());
 

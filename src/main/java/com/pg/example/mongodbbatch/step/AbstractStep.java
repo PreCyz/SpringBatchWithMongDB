@@ -213,7 +213,7 @@ abstract class AbstractStep implements Tasklet {
 
     private void extractColumns() throws JSONException {
         logger.debug("Requesting Palantir for data set columns [{}.{}].", branchName, dataSetName);
-        String jsonResponse = palantirClient.getData(getQueryColumnBuilder(branchName), basicUrl + "/query");
+        String jsonResponse = palantirClient.getSchemaData(getQueryColumnBuilder(branchName), basicUrl + "/query");
         Map<String, String> nameTypeMap = ColumnMapper.map(jsonResponse);
         logger.debug("[{}.{}] has {} columns as follows {}.", branchName, dataSetName, nameTypeMap.size(), nameTypeMap);
         headers = new String[nameTypeMap.keySet().size()];
