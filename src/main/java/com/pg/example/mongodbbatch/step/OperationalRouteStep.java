@@ -32,7 +32,8 @@ public class OperationalRouteStep extends AbstractStep {
 
         String indexName = "shipment_version_instance_id_1";
         logger.debug("Creating index [{}]", indexName);
-        Index index = new Index().on("SHIPMENT_VERSION_INSTANCE_ID", Sort.Direction.DESC).background();
+        Index index = new Index().on("SHIPMENT_VERSION_INSTANCE_ID", Sort.Direction.DESC)
+                .background();
         tempDBCollection.createIndex(index.getIndexKeys(), indexName, false);
     }
 
@@ -43,6 +44,10 @@ public class OperationalRouteStep extends AbstractStep {
 
     @Override
     protected CreationDetails createCreationDetail(DBObject dbObject, Date creationDate) {
-        return new CreationDetails("SHIPMENT_VERSION_INSTANCE_ID", String.valueOf(dbObject.get("SHIPMENT_VERSION_INSTANCE_ID")), creationDate);
+        return new CreationDetails(
+                "SHIPMENT_VERSION_INSTANCE_ID",
+                String.valueOf(dbObject.get("SHIPMENT_VERSION_INSTANCE_ID")),
+                creationDate
+        );
     }
 }

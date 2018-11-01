@@ -32,12 +32,14 @@ public class EquipmentCargoStep extends AbstractStep {
 
         String indexName = "fk_shipment_version_1";
         logger.debug("Creating index [{}]", indexName);
-        Index index = new Index().on("FK_SHIPMENT_VERSION", Sort.Direction.DESC).background();
+        Index index = new Index().on("FK_SHIPMENT_VERSION", Sort.Direction.DESC)
+                .background();
         tempDBCollection.createIndex(index.getIndexKeys(), indexName, false);
 
         indexName = "equipment_assignment_instance_id_1";
         logger.debug("Creating index [{}]", indexName);
-        index = new Index().on("EQUIPMENT_ASSIGNMENT_INSTANCE_ID", Sort.Direction.DESC).background();
+        index = new Index().on("EQUIPMENT_ASSIGNMENT_INSTANCE_ID", Sort.Direction.DESC)
+                .background();
         tempDBCollection.createIndex(index.getIndexKeys(), indexName, false);
     }
 
@@ -48,6 +50,10 @@ public class EquipmentCargoStep extends AbstractStep {
 
     @Override
     protected CreationDetails createCreationDetail(DBObject dbObject, Date creationDate) {
-        return new CreationDetails("EQUIPMENT_ASSIGNMENT_INSTANCE_ID", String.valueOf(dbObject.get("EQUIPMENT_ASSIGNMENT_INSTANCE_ID")), creationDate);
+        return new CreationDetails(
+                "EQUIPMENT_ASSIGNMENT_INSTANCE_ID",
+                String.valueOf(dbObject.get("EQUIPMENT_ASSIGNMENT_INSTANCE_ID")),
+                creationDate
+        );
     }
 }
