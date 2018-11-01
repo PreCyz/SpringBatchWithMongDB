@@ -86,7 +86,6 @@ abstract class AbstractStep implements Tasklet {
         timeLog.logTime("mapAndSaveToDB");
         mapAndSaveToDB();
 
-        //Create indexes
         timeLog.logTime("createIndexes");
         createIndexes();
 
