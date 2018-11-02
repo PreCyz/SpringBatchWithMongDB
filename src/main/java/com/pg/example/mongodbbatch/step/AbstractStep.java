@@ -80,8 +80,8 @@ abstract class AbstractStep implements Tasklet {
         timeLog.logTime("extractColumns");
         extractColumns();
 
-        timeLog.logTime("getCsvResult");
-        getCsvResult();
+        timeLog.logTime("downloadCsv");
+        downloadCsv();
 
         timeLog.logTime("mapAndSaveToDB");
         mapAndSaveToDB();
@@ -108,7 +108,7 @@ abstract class AbstractStep implements Tasklet {
         tempDBCollection.rename(collectionName, true);
     }
 
-    private void getCsvResult() throws IOException {
+    private void downloadCsv() throws IOException {
         logger.debug("Requesting Palantir for data set [{}.{}].", branchName, dataSetName);
         palantirClient.downloadDataToFile(urlBuilder(), filePath);
     }
