@@ -5,3 +5,5 @@ Elegant example -real life scenario - of spring batch with MongoDB.
 - Spring Boot 1.5.10,
 - Spring Web 4.3.13,
 - MongoDB 3.4.
+
+Created in purpose of article [Spring Batch: a Typical Use Case](https://dzone.com/articles/spring-batch-typical-use-case).
