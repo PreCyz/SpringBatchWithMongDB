@@ -82,22 +82,6 @@ public class MongoJobExecutionDao extends AbstractMongoDao implements JobExecuti
                 object
         );
 
-        /*// Avoid concurrent modifications...
-        DBObject lastError = update.getLastError();
-        if (!((Boolean) lastError.get(UPDATED_EXISTING_STATUS))) {
-            logger.error("Update returned status {}", lastError);
-            DBObject existingJobExecution = getCollection().findOne(jobExecutionIdObj(jobExecutionId), new BasicDBObject(VERSION_KEY, 1));
-            if (existingJobExecution == null) {
-                throw new IllegalArgumentException("Can't update this jobExecution, it was never saved.");
-            }
-            Integer curentVersion = ((Integer) existingJobExecution.get(VERSION_KEY));
-            throw new OptimisticLockingFailureException(
-                    "Attempt to update job execution id=" + jobExecutionId
-                            + " with wrong version ("
-                            + jobExecution.getVersion()
-                            + "), where current version is " + curentVersion);
-        }*/
-
         jobExecution.incrementVersion();
     }
 

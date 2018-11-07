@@ -1,14 +1,9 @@
 package com.pg.example.mongodbbatch.config;
 
-import org.springframework.batch.core.configuration.JobRegistry;
 import org.springframework.batch.core.configuration.annotation.BatchConfigurer;
-import org.springframework.batch.core.configuration.support.JobRegistryBeanPostProcessor;
-import org.springframework.batch.core.configuration.support.MapJobRegistry;
 import org.springframework.batch.core.explore.JobExplorer;
 import org.springframework.batch.core.explore.support.SimpleJobExplorer;
-import org.springframework.batch.core.launch.JobOperator;
 import org.springframework.batch.core.launch.support.SimpleJobLauncher;
-import org.springframework.batch.core.launch.support.SimpleJobOperator;
 import org.springframework.batch.core.repository.JobRepository;
 import org.springframework.batch.core.repository.dao.ExecutionContextDao;
 import org.springframework.batch.core.repository.dao.JobExecutionDao;
@@ -59,22 +54,4 @@ public class MainBatchConfigurer implements BatchConfigurer {
         return new SimpleJobExplorer(mongoJobInstanceDao, mongoJobExecutionDao, mongoStepExecutionDao, mongoExecutionContextDao);
     }
 
-    private JobOperator jobOperator() throws Exception {
-        SimpleJobOperator jobOperator = new SimpleJobOperator();
-        jobOperator.setJobLauncher(getJobLauncher());
-        jobOperator.setJobExplorer(getJobExplorer());
-        jobOperator.setJobRepository(getJobRepository());
-        jobOperator.setJobRegistry(jobRegistry());
-        return jobOperator;
-    }
-
-    private JobRegistry jobRegistry() {
-        return new MapJobRegistry();
-    }
-
-    private JobRegistryBeanPostProcessor jobRegistryBeanPostProcessor() {
-        JobRegistryBeanPostProcessor postProcessor = new JobRegistryBeanPostProcessor();
-        postProcessor.setJobRegistry(jobRegistry());
-        return postProcessor;
-    }
 }

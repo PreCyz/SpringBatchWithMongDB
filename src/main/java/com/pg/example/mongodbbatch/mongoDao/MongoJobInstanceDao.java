@@ -22,11 +22,13 @@ import java.util.*;
 public class MongoJobInstanceDao extends AbstractMongoDao implements JobInstanceDao {
 
     @PostConstruct
+    @Override
     public void init() {
         super.init();
         getCollection().createIndex(jobInstanceIdObj(1L));
     }
 
+    @Override
     public JobInstance createJobInstance(String jobName, final JobParameters jobParameters) {
         Assert.notNull(jobName, "Job name must not be null.");
         Assert.notNull(jobParameters, "JobParameters must not be null.");
@@ -55,6 +57,7 @@ public class MongoJobInstanceDao extends AbstractMongoDao implements JobInstance
         return jobInstance;
     }
 
+    @Override
     public JobInstance getJobInstance(String jobName, JobParameters jobParameters) {
         Assert.notNull(jobName, "Job name must not be null.");
         Assert.notNull(jobParameters, "JobParameters must not be null.");
@@ -67,20 +70,24 @@ public class MongoJobInstanceDao extends AbstractMongoDao implements JobInstance
                         .add(JOB_KEY_KEY, jobKey).get()), jobParameters);
     }
 
+    @Override
     public JobInstance getJobInstance(Long instanceId) {
         return mapJobInstance(getCollection().findOne(jobInstanceIdObj(instanceId)));
     }
 
+    @Override
     public JobInstance getJobInstance(JobExecution jobExecution) {
         DBObject instanceId = mongoTemplate.getCollection(JobExecution.class.getSimpleName()).findOne(jobExecutionIdObj(jobExecution.getId()), jobInstanceIdObj(1L));
         removeSystemFields(instanceId);
         return mapJobInstance(getCollection().findOne(instanceId));
     }
 
+    @Override
     public List<JobInstance> getJobInstances(String jobName, int start, int count) {
         return mapJobInstances(getCollection().find(new BasicDBObject(JOB_NAME_KEY, jobName)).sort(jobInstanceIdObj(-1L)).skip(start).limit(count));
     }
 
+    @Override
     @SuppressWarnings({"unchecked"})
     public List<String> getJobNames() {
         List results = getCollection().distinct(JOB_NAME_KEY);
@@ -144,11 +151,14 @@ public class MongoJobInstanceDao extends AbstractMongoDao implements JobInstance
         return jobInstance;
     }
 
-
     @Override
     public List<JobInstance> findJobInstancesByName(String jobName, int start, int count) {
         List<JobInstance> result = new ArrayList<>();
-        List<JobInstance> jobInstances = mapJobInstances(getCollection().find(new BasicDBObject(JOB_NAME_KEY, jobName)).sort(jobInstanceIdObj(-1L)));
+        List<JobInstance> jobInstances = mapJobInstances(
+                getCollection()
+                        .find(new BasicDBObject(JOB_NAME_KEY, jobName))
+                        .sort(jobInstanceIdObj(-1L))
+        );
         for (JobInstance instanceEntry : jobInstances) {
             String key = instanceEntry.getJobName();
             String curJobName = key.substring(0, key.lastIndexOf("|"));
@@ -163,7 +173,11 @@ public class MongoJobInstanceDao extends AbstractMongoDao implements JobInstance
     @Override
     public int getJobInstanceCount(String jobName) throws NoSuchJobException {
         int count = 0;
-        List<JobInstance> jobInstances = mapJobInstances(getCollection().find(new BasicDBObject(JOB_NAME_KEY, jobName)).sort(jobInstanceIdObj(-1L)));
+        List<JobInstance> jobInstances = mapJobInstances(
+                getCollection()
+                        .find(new BasicDBObject(JOB_NAME_KEY, jobName))
+                        .sort(jobInstanceIdObj(-1L))
+        );
         for (JobInstance instanceEntry : jobInstances) {
             String key = instanceEntry.getJobName();
             String curJobName = key.substring(0, key.lastIndexOf("|"));
