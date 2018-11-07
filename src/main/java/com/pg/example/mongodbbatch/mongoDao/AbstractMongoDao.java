@@ -16,7 +16,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /* Created by Pawel Gawedzki on 16-Mar-18.*/
-public abstract class AbstractMongoDao {
+abstract class AbstractMongoDao {
     //public static final String UPDATED_EXISTING_STATUS = "updatedExisting";
     static final String VERSION_KEY = "version";
     static final String START_TIME_KEY = "startTime";
